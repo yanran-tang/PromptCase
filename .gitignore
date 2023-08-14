@@ -1,0 +1,13 @@
+/COLIEE/task1_test_2023/task1_test_files_2023
+
+/COLIEE/task1_test_2023/task1_test_labels_2023.json
+
+/LeCaRD/candidate
+
+/LeCaRD/lecard_golden_labels.json
+
+/LeCaRD/stopword.txt
+
+LeCaRD/query.json
+
+/__pycache__
