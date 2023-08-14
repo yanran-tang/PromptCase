@@ -11,3 +11,7 @@
 LeCaRD/query.json
 
 /__pycache__
+
+/.idea
+
+/.vscode
