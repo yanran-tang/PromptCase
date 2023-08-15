@@ -56,7 +56,7 @@ $ ./COLIEE/
    - `COLIEE/task1_test_2023/processed_new/`, 
    - `COLIEE/task1_test_2023/summary_test_2023_txt/`. 
    
-   Note: the randomness of ChatGPT summary generation may cause different performances under the same experiment settings.
+   Note: the randomness of ChatGPT summary generation may cause different performances under the same experiment settings. And the ChatGPT generated summary files used in our experiment are provided.
 
 # Model running
 Run `python3 PromptCase_model.py --dataset $A --stage_num $B`.
