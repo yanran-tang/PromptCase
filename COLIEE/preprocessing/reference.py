@@ -9,6 +9,7 @@ DetectorFactory.seed = 0
 
 
 names = os.listdir("./COLIEE/task1_test_2023/task1_test_files_2023")
+os.mkdir('./COLIEE/task1_test_2023/processed_new')
 
 last_lang = "en"
 
