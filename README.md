@@ -64,3 +64,17 @@ Run `python3 PromptCase_model.py --dataset $A --stage_num $B`.
 1. `$A` is the dataset that can be chosen as `leacrd` or `coliee`.
 2. `$B` is one stage or two stage experiment that can be chosen as `1` or `2`.
 3. The PromptCase model is based on [SAILER](https://github.com/CSHaitao/SAILER/).
+
+# Cite
+If you find this repo useful, please cite
+```
+@article{PromptCase,
+  author    = {Yanran Tang and 
+               Ruihong Qiu and 
+               Xue Li},
+  title     = {Prompt-based Effective Input Reformulation for Legal Case Retrieval},
+  journal   = {CoRR},
+  volume    = {abs/2309.02962},
+  year      = {2023},
+}
+```
