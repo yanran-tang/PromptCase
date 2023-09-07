@@ -13,8 +13,8 @@ $ ./LeCaRD/
 .
 ├── candidate
 │   ├── -741
-│   └── -991
-│   └── -1071
+│   ├── -991
+│   ├── -1071
 │   └── ...
 ├── issues_name.txt
 ├── lecard_golden_labels.json
@@ -29,6 +29,7 @@ $ ./LeCaRD/
 $ ./COLIEE/
 .
 ├── preprocessing
+│   ├── openaiAPI.py
 │   ├── process.py
 │   └── reference.py
 ├── task1_test_2023
