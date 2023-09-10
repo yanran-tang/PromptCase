@@ -1,7 +1,7 @@
 # PromptCase
 Code for ADC 2023 paper submission.
 
-Title: Prompt-based Effective Input Reformulation for Legal Case Retrieval
+Title: [Prompt-based Effective Input Reformulation for Legal Case Retrieval](https://arxiv.org/abs/2309.02962)
 
 Author: Yanran Tang, Ruihong Qiu and Xue Li
 
