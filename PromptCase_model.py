@@ -14,7 +14,6 @@ import torch_metrics
 
 import argparse
 parser = argparse.ArgumentParser(formatter_class=argparse.ArgumentDefaultsHelpFormatter)
-device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 # Training config
 parser.add_argument("--dataset", type=str, default='lecard',
                     help="lecard, coliee")
@@ -61,7 +60,7 @@ def micro_prec_datefilter(query_case, true_list, pred_list, k):
 # #Load data
 if args.dataset == 'coliee':
     model_name = 'CSHaitao/SAILER_en_finetune'
-    model = AutoModel.from_pretrained(model_name).to(device)
+    model = AutoModel.from_pretrained(model_name)
     tokenizer = AutoTokenizer.from_pretrained(model_name)
 
     RDIR_sum = './COLIEE/task1_test_2023/summary_test_2023_txt'
@@ -80,7 +79,7 @@ if args.dataset == 'coliee':
 
 elif args.dataset == 'lecard':
     model_name = 'CSHaitao/SAILER_zh'
-    model = BertModel.from_pretrained(model_name).to(device)
+    model = BertModel.from_pretrained(model_name)
     tokenizer = BertTokenizer.from_pretrained(model_name)
     query_fact_dict = {}
     query_crime_dict = {}
@@ -133,21 +132,21 @@ with torch.no_grad():
             cross_text = fact_text+' '+issue_text
 
             ## dual encoding
-            fact_tokenized_id = tokenizer(fact_text, return_tensors="pt", padding=False, truncation=True, max_length=512).to(device)
+            fact_tokenized_id = tokenizer(fact_text, return_tensors="pt", padding=False, truncation=True, max_length=512)
             fact_embedding = model(**fact_tokenized_id)
-            fact_cls_embedding = fact_embedding[0][:,0].to("cpu") ##cls token embedding [1,768]
+            fact_cls_embedding = fact_embedding[0][:,0] ##cls token embedding [1,768]
             fact_embedding_dict.update({file_name:fact_cls_embedding})
 
-            issue_tokenized_id = tokenizer(issue_text, return_tensors="pt", padding=False, truncation=True, max_length=512).to(device)
+            issue_tokenized_id = tokenizer(issue_text, return_tensors="pt", padding=False, truncation=True, max_length=512)
             issue_embedding = model(**issue_tokenized_id)
-            issue_cls_embedding = issue_embedding[0][:,0].to("cpu")  ##cls token embedding [1,768]
+            issue_cls_embedding = issue_embedding[0][:,0]  ##cls token embedding [1,768]
             issue_embedding_dict.update({file_name:issue_cls_embedding})
             
 
             ## cross encoding
-            cross_tokenized_id = tokenizer(cross_text, return_tensors="pt", padding=False, truncation=True, max_length=512).to(device)
+            cross_tokenized_id = tokenizer(cross_text, return_tensors="pt", padding=False, truncation=True, max_length=512)
             cross_embedding = model(**cross_tokenized_id)
-            cross_cls_embedding = cross_embedding[0][:,0].to("cpu") ##cls token embedding [1,768]
+            cross_cls_embedding = cross_embedding[0][:,0] ##cls token embedding [1,768]
             cross_embedding_dict.update({file_name:cross_cls_embedding})
             
     elif args.dataset == 'lecard':
@@ -174,22 +173,19 @@ with torch.no_grad():
             issue = '法律纠纷：'+case_issue_dict[str(k)]
             cross_text = fact+' '+issue
 
-            fact_tokenized_id = tokenizer(fact, return_tensors="pt", padding=True, truncation=True, max_length=512).to(device)
+            fact_tokenized_id = tokenizer(fact, return_tensors="pt", padding=True, truncation=True, max_length=512)
             fact_embedding = model(**fact_tokenized_id)
-            # fact_embedding = fact_embedding.to('cpu')
-            fact_cls_embedding = fact_embedding[0][:,0].to('cpu') ##cls token embedding [1,768]
+            fact_cls_embedding = fact_embedding[0][:,0] ##cls token embedding [1,768]
             fact_embedding_dict.update({str(k):fact_cls_embedding})
             
-            issue_tokenized_id = tokenizer(issue, return_tensors="pt", padding=True, truncation=True, max_length=512).to(device)
+            issue_tokenized_id = tokenizer(issue, return_tensors="pt", padding=True, truncation=True, max_length=512)
             issue_embedding = model(**issue_tokenized_id)
-            # issue_embedding = issue_embedding.to('cpu')
-            issue_cls_embedding = issue_embedding[0][:,0].to('cpu') ##cls token embedding [1,768]
+            issue_cls_embedding = issue_embedding[0][:,0] ##cls token embedding [1,768]
             issue_embedding_dict.update({str(k):issue_cls_embedding})
 
-            cross_tokenized_id = tokenizer(cross_text, return_tensors="pt", padding=False, truncation=True, max_length=512).to(device)
+            cross_tokenized_id = tokenizer(cross_text, return_tensors="pt", padding=False, truncation=True, max_length=512)
             cross_embedding = model(**cross_tokenized_id)
-            # cross_embedding = cross_embedding.to('cpu')
-            cross_cls_embedding = cross_embedding[0][:,0].to('cpu') ##cls token embedding [1,768]
+            cross_cls_embedding = cross_embedding[0][:,0] ##cls token embedding [1,768]
             cross_embedding_dict.update({str(k):cross_cls_embedding})
                             
             can_list = []
@@ -198,25 +194,22 @@ with torch.no_grad():
                 file_name = str(k)+'/'+file
 
                 fact = '法律事实：'+case_fact_dict[file_name]
-                case_fact_tokenized_id = tokenizer(fact, return_tensors="pt", padding=True, truncation=True, max_length=512).to(device)
+                case_fact_tokenized_id = tokenizer(fact, return_tensors="pt", padding=True, truncation=True, max_length=512)
                 fact_embedding = model(**case_fact_tokenized_id)
-                # fact_embedding = fact_embedding.to('cpu')
-                fact_cls_embedding = fact_embedding[0][:,0].to('cpu') ##cls token embedding [1,768]
+                fact_cls_embedding = fact_embedding[0][:,0] ##cls token embedding [1,768]
                 fact_embedding_dict.update({file_name:fact_cls_embedding})
 
                 issue = '法律纠纷：'+case_issue_dict[file_name]
-                case_issue_tokenized_id = tokenizer(issue, return_tensors="pt", padding=True, truncation=True, max_length=512).to(device)
+                case_issue_tokenized_id = tokenizer(issue, return_tensors="pt", padding=True, truncation=True, max_length=512)
                 issue_embedding = model(**case_issue_tokenized_id)
-                # issue_embedding = issue_embedding.to('cpu')
-                issue_cls_embedding = issue_embedding[0][:,0].to('cpu') ##cls token embedding [1,768]
+                issue_cls_embedding = issue_embedding[0][:,0] ##cls token embedding [1,768]
                 issue_embedding_dict.update({file_name:issue_cls_embedding})
                 
                 cross_text = fact+' '+issue
                 
-                cross_tokenized_id = tokenizer(cross_text, return_tensors="pt", padding=False, truncation=True, max_length=512).to(device)
+                cross_tokenized_id = tokenizer(cross_text, return_tensors="pt", padding=False, truncation=True, max_length=512)
                 cross_embedding = model(**cross_tokenized_id)
-                # cross_embedding = cross_embedding.to('cpu')
-                cross_cls_embedding = cross_embedding[0][:,0].to('cpu') ##cls token embedding [1,768]
+                cross_cls_embedding = cross_embedding[0][:,0] ##cls token embedding [1,768]
                 cross_embedding_dict.update({file_name:cross_cls_embedding})
 
 ## Case representation finished
