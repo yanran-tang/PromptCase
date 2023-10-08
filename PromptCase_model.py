@@ -373,13 +373,14 @@ for i in tqdm(result_dict.keys()):
         cls_recall += 0
 
 ## Metrics
+epsilon = 1e-6
 Micro_pre = correct_pred/retri_cases
 Micro_recall = correct_pred/relevant_cases
-Micro_F = 2*Micro_pre*Micro_recall/ (Micro_pre + Micro_recall)
+Micro_F = 2*Micro_pre*Micro_recall/ (Micro_pre + Micro_recall+epsilon)
 
 macro_pre = cls_pre/len(result_dict.keys())
 macro_recall = cls_recall/len(result_dict.keys())
-macro_F = 2*macro_pre*macro_recall/ (macro_pre + macro_recall)
+macro_F = 2*macro_pre*macro_recall/ (macro_pre + macro_recall+epsilon)
 
 ndcg_score, mrr_score, map_score, p_score = torch_metrics.t_metrics(args.dataset, predict_path+'.json')
 
