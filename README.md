@@ -6,7 +6,7 @@ Title: [Prompt-based Effective Input Reformulation for Legal Case Retrieval](htt
 Author: Yanran Tang, Ruihong Qiu and Xue Li
 
 # Dataset
-1. For LeCaRD dataset, download datasets from [LeCaRD](https://github.com/myx666/LeCaRD) and put the files `query.json`, `lecard_golden_labels.json`, `stopword.txt`in `./LeCaRD/` like the following. All of the cases from folders of candidates1 and cndidates2 of LeCaRD are extracted and put in the `candidate` folder as follows:
+1. For LeCaRD dataset, download datasets from [LeCaRD](https://github.com/myx666/LeCaRD) and put the files `query.json`, `golden_labels.json`, `stopword.txt`in `./LeCaRD/` like the following. All of the cases from folders of candidates1 and cndidates2 of LeCaRD are extracted and put in the `candidate` folder as follows:
 
 ```
 $ ./LeCaRD/
@@ -17,7 +17,7 @@ $ ./LeCaRD/
 │   ├── -1071
 │   └── ...
 ├── issues_name.txt
-├── lecard_golden_labels.json
+├── golden_labels.json
 ├── lecard_preprocessing.py
 ├── PromptCase_lecard_BM25_prediction_dict.json
 ├── query.json

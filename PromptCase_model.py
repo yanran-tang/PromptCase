@@ -99,7 +99,7 @@ elif args.dataset == 'lecard':
         top_10_list = json.load(file)
         file.close()
     
-    with open('./LeCaRD/lecard_golden_labels.json', "r") as fOut:
+    with open('./LeCaRD/golden_labels.json', "r") as fOut:
         query_list = json.load(fOut)
 
 
@@ -357,6 +357,7 @@ for i in tqdm(result_dict.keys()):
     topk = 5 ## top 5
     pred_list = result_dict[i]
     if args.dataset == 'lecard':
+        true_list = [str(value) for value in true_list]
         c_p, r_c = micro_prec(true_list, pred_list, topk)
     elif args.dataset == 'coliee':
         c_p, r_c = micro_prec_datefilter(query_case, true_list, pred_list, topk)
