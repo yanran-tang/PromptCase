@@ -10,7 +10,7 @@ def t_metrics(dataset, predict_path):
     if dataset == 'coliee':
         label_path = './COLIEE/task1_test_2023/task1_test_labels_2023.json'
     elif dataset == 'lecard':
-        label_path = './LeCaRD/lecard_golden_labels.json'
+        label_path = './LeCaRD/golden_labels.json'
 
     ## prediction preprocess
     pre_dic = json.load(open(predict_path, 'r'))
