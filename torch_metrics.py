@@ -16,6 +16,13 @@ def t_metrics(dataset, predict_path):
     pre_dic = json.load(open(predict_path, 'r'))
     label_dict = json.load(open(label_path, 'r'))
 
+    if dataset == 'lecard':
+        label_dict_origin = label_dict
+        label_dict = {}
+        for k, v in label_dict_origin.items():
+            val = [str(value) for value in v]
+            label_dict.update({k: val})
+
     index = -1
     index_list = []
     preds_list = []
