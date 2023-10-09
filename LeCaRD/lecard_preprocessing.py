@@ -66,7 +66,7 @@ for issue in issues:
         issue_name_list.append(issue_1.split('罪\n')[0])
 
 query_label_dict = {}
-with open('./LeCaRD/lecard_golden_labels.json', 'r') as f:
+with open('./LeCaRD/golden_labels.json', 'r') as f:
     lines = f.readlines()
     for line in lines:
         q_dict = json.loads(line)
